@@ -1,28 +1,7 @@
-import { useState } from 'react';
 import Square from './Square';
+import PropTypes from 'prop-types';
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
-  const [isNext, setIsNext] = useState(false);
-
-  const handleSquareClick = clickedposition => {
-    if (squares[clickedposition]) {
-      return;
-    }
-
-    setSquares(currentSquare => {
-      return currentSquare.map((squarevalue, position) => {
-        if (clickedposition === position) {
-          return isNext ? 'X' : 'O';
-        }
-        return squarevalue;
-      });
-    });
-
-    setIsNext(currentIsNext => !currentIsNext);
-  };
-
+const Board = ({ squares, handleSquareClick }) => {
   const renderSquare = position => {
     return (
       <Square
@@ -50,6 +29,11 @@ const Board = () => {
       </div>
     </div>
   );
+};
+
+Board.propTypes = {
+  squares: PropTypes.array.isRequired,
+  handleSquareClick: PropTypes.func.isRequired,
 };
 
 export default Board;
