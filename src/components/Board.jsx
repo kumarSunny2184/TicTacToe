@@ -1,12 +1,15 @@
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-const Board = ({ squares, handleSquareClick }) => {
+const Board = ({ squares, handleSquareClick, winningSquares }) => {
   const renderSquare = position => {
+    const isWinningSquare = winningSquares.includes(position);
+
     return (
       <Square
         value={squares[position]}
         onClick={() => handleSquareClick(position)}
+        isWinningSquare={isWinningSquare}
       />
     );
   };
@@ -34,6 +37,7 @@ const Board = ({ squares, handleSquareClick }) => {
 Board.propTypes = {
   squares: PropTypes.array.isRequired,
   handleSquareClick: PropTypes.func.isRequired,
+  winningSquares: PropTypes.func.isRequired,
 };
 
 export default Board;
