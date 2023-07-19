@@ -1,0 +1,29 @@
+import PropTypes from 'prop-types';
+
+const History = ({ history, moveTo, currentMove }) => {
+  return (
+    <div className="history-wrapper">
+      <ul className="history">
+        {history.map((_, index) => (
+          <li key={index}>
+            <button
+              type="button"
+              className={`btn-move ${currentMove === index ? 'active' : ''}`}
+              onClick={() => moveTo(index)}
+            >
+              {index === 0 ? 'Go to game start' : `Go to move #${index}`}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+History.propTypes = {
+  history: PropTypes.array.isRequired,
+  moveTo: PropTypes.func.isRequired,
+  currentMove: PropTypes.func.isRequireds,
+};
+
+export default History;

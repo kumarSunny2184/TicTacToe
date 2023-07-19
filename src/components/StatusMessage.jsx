@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
-const StatusMessage = ({ winner, isNext, squares }) => {
+const StatusMessage = ({ winner, gamingBoard }) => {
+  const { squares, isNext } = gamingBoard;
   const nomoveLeft = squares.every(squarevalue => squarevalue !== null);
   const nextplayer = isNext ? 'X' : 'O';
 
@@ -38,10 +39,13 @@ const StatusMessage = ({ winner, isNext, squares }) => {
   };
   return <h2 className="status-message">{renderstatusmesage()}</h2>;
 };
+
 StatusMessage.propTypes = {
   winner: PropTypes.string, // Allows string or null
-  isNext: PropTypes.bool.isRequired,
-  squares: PropTypes.array.isRequired,
+  gamingBoard: PropTypes.shape({
+    squares: PropTypes.array.isRequired,
+    isNext: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default StatusMessage;
